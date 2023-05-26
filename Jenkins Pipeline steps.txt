@@ -1,0 +1,56 @@
+
+
+<h2> Hi Welcome to New Pipeline <h2>
+
+Pre-requisites:
+
+1. Install Java 11 or 17
+2. Install Maven 
+3. Install Jenkins
+4. Install Git
+5. Clone the code from the Git Repo
+6. Configure the Tomcat
+7. Webhook - Configuration   (One of the Trigger to do the Job)
+
+***********************************************************************************
+
+1. Install Java 11 or 17
+
+To check the java installed in Server
+* alternatives --config java
+
+***********************************************************************************
+
+2. Install Maven
+	* Go to location /opt/
+	* download Maven by using wget https://dlcdn.apache.org/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.zip
+	* unzip apache-maven-3.9.2-bin.zip 
+	* mv apache-maven-3.9.2 maven-3.9
+	* 	#PATH=$PATH:$HOME/bin
+	   	M2_HOME=/opt/maven/maven-3.9
+		M2=$M2_HOME/bin
+		PATH=$PATH:$JAVA_HOME:M2_HOME:$M2:$HOME/bin
+		export PATH
+
+***********************************************************************************
+3. Install Jenkins
+	* sudo yum update –y
+	* wget -O /etc/yum.repos.d/jenkins.repo \
+    	  https://pkg.jenkins.io/redhat-stable/jenkins.repo
+	* rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+	* yum upgrade
+	* amazon-linux-extras install java-openjdk11 -y
+	* yum install jenkins -y
+	* systemctl enable jenkins
+
+Enable these  roles in the file /opt/tomcat-9/conf/tomcat-users.xml
+  <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <role rolename="mnager-status"/>
+  <role rolename="manager-jmx"/>
+  <user username="admin" password="admin" roles="manager-gui, manager-script, mnager-status, manager-jmx"/>
+  <user username="deployer" password="deployer" roles="manager-script"/>
+  <user username="tomcat" password="sharma" roles="manager-gui"/>
+
+***********************************************************************************
+
